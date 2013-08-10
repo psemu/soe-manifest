@@ -9,6 +9,7 @@ function setup() {
     $(document).on("drop", function(e) {
         e.preventDefault();
         $("#container").hide();
+        $("#drop-here").hide();
         $("#waiting").show();
         var files = e.originalEvent.dataTransfer.files,
             file, reader, data;
