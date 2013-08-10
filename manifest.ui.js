@@ -118,6 +118,9 @@ function displayManifest(filename, manifest) {
     if ("setupExecutable" in manifest) {
         addHeaderLine("Setup executable:", manifest.setupExecutable);
     }
+    if ("locales" in manifest) {
+        addHeaderLine("Locales:", manifest.locales);
+    }
     if ("includeManifests" in manifest) {
         var $span = $("<span>"),
             url;
