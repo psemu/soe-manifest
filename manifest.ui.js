@@ -130,7 +130,6 @@ function displayManifest(filename, manifest) {
         }
         addHeaderLine("Include manifests:", $span);
     }
-    console.log(manifest);
     $("#container .manifest-assets").html("");
     addAssetFolder(manifest, manifest.assets, "");
 
@@ -206,6 +205,14 @@ function addAssetFolder(manifest, assets, folderName) {
                         $("<div>").append(
                             $("<div>").addClass("label").html("Timestamp:"),
                             $("<div>").addClass("value").html(file.timestamp)
+                        )
+                    );
+                }
+                if ("locale" in file) {
+                    $details.append(
+                        $("<div>").append(
+                            $("<div>").addClass("label").html("Locale:"),
+                            $("<div>").addClass("value").html(file.locale)
                         )
                     );
                 }
