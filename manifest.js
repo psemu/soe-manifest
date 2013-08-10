@@ -265,6 +265,9 @@ function parseManifest(data) {
             case 0x29:
                 manifest.timestamp = parseDate(entry);
                 break;
+            case 0x2B:
+                manifest.locales = parseString(entry);
+                break;
             case 0x2C:
                 manifest.unknown0x2C = parseUInt(entry);
                 break;
