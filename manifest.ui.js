@@ -252,6 +252,7 @@ function addAssetFolder(manifest, assets, folderName) {
                     (file.deleted ? "" : $("<div>").addClass("download-link").append(
                         $("<a>")
                             .attr("href", makeLink(manifest, file))
+                            .attr("title", "Download this file")
                             .attr("download", file.name + ".soe")
                             .html("&dArr;")
                     ))
