@@ -204,7 +204,7 @@ function parseFileGroup(entry) {
 function parseManifest(data) {
     var manifest = {},
         entries = parseEntries(data);
-    console.log(entries);
+
     for (var i=0;i<entries.length;i++) {
         var entry = entries[i];
         switch (entries[i].type) {
