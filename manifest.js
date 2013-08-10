@@ -131,6 +131,9 @@ function parseFileEntry(entry) {
             case 0x0D:
                 file.unknown0x0D = parseUInt(entries[i]);
                 break;
+            case 0x14:
+                file.locale = parseString(entries[i]);
+                break;
             case 0xFE:
                 if (entries[i].entryType == 0x09) {
                     file.delta = file.delta || [];
