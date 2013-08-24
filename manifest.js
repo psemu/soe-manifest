@@ -163,18 +163,13 @@ function parseFileDelta(entry) {
                 delta.crc32 = parseUInt(deltaData[i]);
                 break;
             case 0x03:
-                delta.n1 = parseUInt(deltaData[i]);
+                delta.sizeCompressed = parseUInt(deltaData[i]);
                 break;
             case 0x04:
                 delta.timestamp = parseDate(deltaData[i]);
                 break;
-            /*
-            case 0x05:
-                delta.timestamp2 = parseDate(deltaData[i]);
-                break;
-            */
             case 0x08:
-                delta.n2 = parseUInt(deltaData[i]);
+                delta.sizeUncompressed = parseUInt(deltaData[i]);
                 break;
             default:
                 console.log("Unknown entry type in file delta entry: " + deltaData[i].type);
