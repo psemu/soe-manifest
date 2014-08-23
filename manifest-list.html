@@ -31,35 +31,121 @@
         #container div a:hover {
             text-decoration: underline;
         }
+        #container .url.mirror {
+            color : black;
+            font-size: 80%;
+            margin-left: 10px;
+        }
 
     </style>
     <script src="jquery-2.0.3.min.js"></script>
     <script>
         var apps = [
             {
+                name: "Launchpad 4",
+                manifests: [
+                    {name: "Common",                    url: "http://manifest.patch.station.sony.com/patch/sha/manifest/lp4/live/common.sha.soe"},
+                    {name: "Application Updater",       url: "http://manifest.patch.station.sony.com/patch/sha/manifest/lp4/live/applicationupdater.sha.soe"},
+                    {name: "Planetside 2 Live",         url: "http://manifest.patch.station.sony.com/patch/sha/manifest/lp4/live/gamelauncher/ps2/live.sha.soe"},
+                    {name: "Planetside 2 Test",         url: "http://manifest.patch.station.sony.com/patch/sha/manifest/lp4/live/gamelauncher/ps2/test.sha.soe"},
+                    {name: "Planetside 2 PSG",          url: "http://manifest.patch.station.sony.com/patch/sha/manifest/lp4/live/gamelauncher/ps2/psg.sha.soe"},
+                    {name: "Planetside 2 Beta",         url: "http://manifest.patch.station.sony.com/patch/sha/manifest/launchpad/lp4-live/live/lp-code4344-beta.sha.soe"},
+                    {name: "The9 Planetside 2 Live",    url: "http://patch.ps2.the9.com/patch/sha/manifest/lp4/live/gamelauncher/ps2/live.sha.th9"},
+                    {name: "The9 Planetside 2 Test",    url: "http://patch.ps2.the9.com/patch/sha/manifest/lp4/live/gamelauncher/ps2/test.sha.th9"},
+                    {name: "The9 Common",               url: "http://patch.ps2.the9.com/patch/sha/manifest/lp4/live/common.sha.th9"},
+                    {name: "The9 Application Updater",  url: "http://patch.ps2.the9.com/patch/sha/manifest/lp4/live/applicationupdater.sha.th9"},
+                    {name: "Planetside 1",              url: "http://manifest.patch.station.sony.com/patch/sha/manifest/launchpad/lp4-live/live/lp-ps.sha.soe"},
+                    {name: "PoxNora",                   url: "http://manifest.patch.station.sony.com/patch/sha/manifest/launchpad/lp4-live/live/lp-poxnora.sha.soe"},
+                    {name: "DCUO Live",                 url: "http://manifest.patch.station.sony.com/patch/sha/manifest/launchpad/lp4-live/live/lp-dcuo-live.sha.soe"},
+                    {name: "DCUO Test",                 url: "http://manifest.patch.station.sony.com/patch/sha/manifest/launchpad/lp4-live/live/lp-dcuo-test.sha.soe"}
+                ],
+                patchBases: [
+                    "http://launchpad.patch.station.sony.com/patch/sha/launchpad/launchpad.sha.zs"
+                ]
+            },{
                 name: "Planetside 2 (SOE)",
                 manifests: [
                     {name: "Live Client",         url: "http://manifest.patch.station.sony.com/patch/sha/manifest/planetside2/planetside2-live/live/planetside2-live.sha.soe"},
                     {name: "Live Common",         url: "http://manifest.patch.station.sony.com/patch/sha/manifest/planetside2/planetside2-livecommon/live/planetside2-livecommon.sha.soe"},
                     {name: "Test Client",         url: "http://manifest.patch.station.sony.com/patch/sha/manifest/planetside2/planetside2-test/live/planetside2-test.sha.soe"},
-                    {name: "Test Common",         url: "http://manifest.patch.station.sony.com/patch/sha/manifest/planetside2/planetside2-testcommon/live/planetside2-testcommon.sha.soe"},
-                    {name: "Launchpad 4 Live",    url: "http://manifest.patch.station.sony.com/patch/sha/manifest/lp4/live/gamelauncher/ps2/live.sha.soe"},
-                    {name: "Launchpad 4 Test",    url: "http://manifest.patch.station.sony.com/patch/sha/manifest/lp4/live/gamelauncher/ps2/test.sha.soe"},
-                    {name: "Launchpad 4 Beta",    url: "http://manifest.patch.station.sony.com/patch/sha/manifest/launchpad/lp4-live/live/lp-code4344-beta.sha.soe"},
-                    {name: "Launchpad 4 Common",  url: "http://manifest.patch.station.sony.com/patch/sha/manifest/lp4/live/common.sha.soe"},
-                    {name: "Launchpad 4 Updater", url: "http://manifest.patch.station.sony.com/patch/sha/manifest/lp4/live/applicationupdater.sha.soe"}
-                    
+                    {name: "Test Common",         url: "http://manifest.patch.station.sony.com/patch/sha/manifest/planetside2/planetside2-testcommon/live/planetside2-testcommon.sha.soe"}
+                ],
+                patchBases: [
+                    "http://manifest.patch.station.sony.com/patch/sha/ps2/live/play.sha.zs",
+                    "http://manifest.patch.station.sony.com/patch/sha/ps2/live/common.sha.zs",
+                    "http://manifest.patch.station.sony.com/patch/sha/ps2/test/play.sha.zs",
+                    "http://manifest.patch.station.sony.com/patch/sha/ps2/test/common.sha.zs"
                 ]
-            },
-            {
+            },{
                 name: "Planetside 2 (The9)",
                 manifests: [
-                
                     {name: "Play Live",             url: "http://patch.ps2.the9.com/patch/sha/manifest/ps2/play/live.sha.th9"},
                     {name: "Play Shared",           url: "http://patch.ps2.the9.com/patch/sha/manifest/ps2/play/shared.sha.th9"},
+                    {name: "Admin Live",            url: "http://patch.ps2.the9.com/patch/sha/manifest/ps2/admin/live.sha.th9"},
+                    {name: "Admin Shared",          url: "http://patch.ps2.the9.com/patch/sha/manifest/ps2/admin/shared.sha.th9"},
                     {name: "Common Live",           url: "http://patch.ps2.the9.com/patch/sha/manifest/ps2/common/live.sha.th9"},
                     {name: "Common Shared",         url: "http://patch.ps2.the9.com/patch/sha/manifest/ps2/common/shared.sha.th9"},
-                    {name: "Launchpad 4 Updater",   url: "http://patch.ps2.the9.com/patch/sha/manifest/lp4/live/applicationupdater.sha.th9"}
+                ]
+            },{
+                name: "Planetside 1",
+                manifests: [
+                    {name: "PLS Live",              url: "http://manifest.patch.station.sony.com/patch/sha/manifest/pls/pls-live/live/pls-live.sha.soe"},
+                    {name: "PLS Test",              url: "http://manifest.patch.station.sony.com/patch/sha/manifest/pls/pls-test/live/pls-test.sha.soe"},
+                    {name: "PLS Stage Live",        url: "http://manifest.patch.station.sony.com/patch/manifest/pls/pls-live/pls-live.soe"},
+                    {name: "PLS Stage Test",        url: "http://manifest.patch.station.sony.com/patch/manifest/pls/pls-test/pls-test.soe"},
+                ],
+                patchBases: [
+                    "http://pls.patch.station.sony.com/patch/sha/pls/pls.sha.zs"
+                ]
+            },{
+                name: "Free Realms",
+                manifests: [
+                    {name: "FR Live",               url: "http://manifest.patch.station.sony.com/patch/sha/manifest/fr/fr-live/live/FreeRealms.sha.soe"},
+                    {name: "FR Cider Live",         url: "http://manifest.patch.station.sony.com/patch/sha/manifest/fr/fr-live/live/frplcider.sha.soe"},
+                    {name: "Play Live",             url: "http://manifest.patch.station.sony.com/patch/freerealms/live/play/FreeRealms.soe"},
+                    {name: "Play QA",               url: "http://manifest.patch.station.sony.com/patch/freerealms/live/play/FreeRealms_en_us.soe"},
+                    {name: "Play Stage",            url: "http://manifest.patch.station.sony.com/patch/freerealms/live/play/FreeRealms_stage_en_us.soe"},
+                    {name: "Play Cider Live",       url: "http://manifest.patch.station.sony.com/patch/freerealms/live/play/frplcider.soe"},
+                    {name: "Play Cider Stage",      url: "http://manifest.patch.station.sony.com/patch/freerealms/live/play/frplcider_stage.soe"},
+                    {name: "PS3 SCE Live",          url: "http://manifest.patch.station.sony.com/patch/freerealms/ps3scelive/ps3-web/FreeRealms.soe"},
+                    {name: "PS3 SCE Test",          url: "http://manifest.patch.station.sony.com/patch/freerealms/ps3scetest/ps3-web/FreeRealms.soe"},
+                    {name: "PS3 QA",                url: "http://manifest.patch.station.sony.com/patch/freerealms/ps3qa/ps3-web/FreeRealms.soe"},
+                    {name: "PS3 QA Admin",          url: "http://manifest.patch.station.sony.com/patch/freerealms/ps3qa/ps3-admin/FreeRealms.soe"},
+                    {name: "PS3 SCE QA",            url: "http://manifest.patch.station.sony.com/patch/freerealms/ps3sceqa/ps3-web/FreeRealms.soe"},
+                ],
+                patchBases: [
+                    "http://fr.patch.station.sony.com/patch/sha/fr/fr.sha.zs",
+                    "http://fr.patch.station.sony.com/patch/freerealms/live/play/FreeRealms.zs"
+                ]
+            },{
+                name: "Clone Wars Adventures",
+                manifests: [
+                    {name: "CWA Live",              url: "http://manifest.patch.station.sony.com/patch/sha/manifest/cw/cw-live/live/CloneWars_en_us.sha.soe"},
+                    {name: "Play Live",             url: "http://manifest.patch.station.sony.com/patch/clonewars/live/play/CloneWars_en_us.soe"}
+                ],
+                patchBases: [
+                    "http://manifest.patch.station.sony.com/patch/clonewars/live/play/CloneWars.zs"
+                ]
+            },{
+                name: "EverQuest 2",
+                manifests: [
+                ],
+                patchBases: [
+                    "http://eq2.patch.station.sony.com/patch/sha/eq2/eq2.sha.zs"
+                ]
+            },{
+                name: "Magic: The Gathering - Tactics",
+                manifests: [
+                    {name: "Bootstrap",             url: "http://manifest.patch.station.sony.com/game/magic/patch/bootstrap.soe"}
+                ],
+                patchBases: [
+                    "http://ccg.patch.station.sony.com/patch/sha/mtgtactics/mtgtactics.sha.zs"
+                ]
+            },{
+                name: "TransGaming Cider",
+                manifests: [
+                    {name: "Cider2 Stage",          url: "http://manifest.patch.station.sony.com/patch/cider/cider2-stage/live/cider.sha.soe"},
+                    {name: "Cider2 Live",           url: "http://manifest.patch.station.sony.com/patch/cider/cider2-live/live/cider.sha.soe"}
                 ]
             }
         ];
@@ -81,7 +167,12 @@
                                 .addClass("url")
                                 .attr("href", manifest.url)
                                 .attr("download", "")
-                                .html(manifest.url)
+                                .html(manifest.url),
+                            $("<a>")
+                                .addClass("url mirror")
+                                .attr("href", "./manifests/" + manifest.url.replace("http://", ""))
+                                .attr("download", "")
+                                .html("(mirror)")
                         )
                     );
                 }

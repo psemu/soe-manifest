@@ -57,6 +57,9 @@ function setup() {
         if (e.target.tagName == "A") {
             return;
         }
+        if ($(e.target).hasClass("selectable")) {
+            return;
+        }
         $(".details", e.currentTarget).toggle();
     });
 }
@@ -100,6 +103,12 @@ function displayManifest(filename, manifest) {
     if ("patchUrl" in manifest) {
         addHeaderLine("Patch URL:", manifest.patchUrl);
     }
+    if ("baseUrl" in manifest) {
+        addHeaderLine("Base URL:", manifest.baseUrl);
+    }
+    if ("patchBase" in manifest) {
+        addHeaderLine("Patch Base:", manifest.patchBase);
+    }
     if ("patchServers" in manifest) {
         addHeaderLine("Patch servers:", manifest.patchServers.join("<br>"));
     }
@@ -109,6 +118,9 @@ function displayManifest(filename, manifest) {
     if ("executable" in manifest) {
         addHeaderLine("Game executable:", manifest.executable);
     }
+    if ("executeableArgs" in manifest) {
+        addHeaderLine("Arguments:", manifest.executeableArgs);
+    }
     if ("launchExecutable" in manifest) {
         addHeaderLine("Launcher executable:", manifest.launchExecutable);
     }
@@ -117,6 +129,12 @@ function displayManifest(filename, manifest) {
     }
     if ("setupExecutable" in manifest) {
         addHeaderLine("Setup executable:", manifest.setupExecutable);
+    }
+    if ("localPath1" in manifest) {
+        addHeaderLine("Local path 1:", manifest.localPath1);
+    }
+    if ("localPath2" in manifest) {
+        addHeaderLine("Local path 2:", manifest.localPath2);
     }
     if ("locales" in manifest) {
         addHeaderLine("Locales:", manifest.locales);
@@ -184,6 +202,14 @@ function addAssetFolder(manifest, assets, folderName) {
             } else {
                 $details = $("<div>").addClass("details");
 
+                if ("fileLink" in file) {
+                    $details.append(
+                        $("<div>").append(
+                            $("<div>").addClass("label").html("File link:"),
+                            $("<div>").addClass("value").html(file.fileLink)
+                        )
+                    );
+                }
                 if ("sizeUncompressed" in file) {
                     $details.append(
                         $("<div>").append(
@@ -234,14 +260,19 @@ function addAssetFolder(manifest, assets, folderName) {
                     );
                 }
                 if ("delta" in file) {
+                    var rangeStart = file.sizeCompressed;
                     for (var j=0;j<file.delta.length;j++) {
                         var $delta = $("<div>").addClass("value");
                         var delta = file.delta[j];
+                        var rangeEnd = rangeStart + delta.sizeCompressed;
                         $delta.append(
                             $("<div>").html("Timestamp: " + delta.timestamp),
+                            delta.timestamp2 ? $("<div>").html("Timestamp 2: " + delta.timestamp2) : null,
                             $("<div>").html("Filesize: " + delta.fileSize + " bytes"),
                             $("<div>").html("CRC32: " + (delta.crc32>>>0) + " (0x" + toHex(delta.crc32) + ")"),
-                            $("<div>").html("Range: " + delta.n1 + " - " + delta.n2)
+                            $("<div>").html("Patch size: " + delta.sizeUncompressed + " bytes"),
+                            $("<div>").html("Patch size (compressed): " + delta.sizeCompressed + " bytes"),
+                            $("<div>").addClass("selectable").html("Range: " + rangeStart + "-" + rangeEnd)
                         );
                         $details.append(
                             $("<div>").append(
@@ -249,11 +280,50 @@ function addAssetFolder(manifest, assets, folderName) {
                                 $delta
                             )
                         );
+                        rangeStart += delta.sizeCompressed;
                     }
-
+                }
+                if ("unknown0x05" in file) {
+                    $details.append(
+                        $("<div>").append(
+                            $("<div>").addClass("label").html("Unknown0x05:"),
+                            $("<div>").addClass("value").html(file.unknown0x05)
+                        )
+                    );
+                }
+                if ("unknown0x0A" in file) {
+                    $details.append(
+                        $("<div>").append(
+                            $("<div>").addClass("label").html("Unknown0x0A:"),
+                            $("<div>").addClass("value").html(file.unknown0x0A)
+                        )
+                    );
+                }
+                if ("unknown0x0D" in file) {
+                    $details.append(
+                        $("<div>").append(
+                            $("<div>").addClass("label").html("Unknown0x0D:"),
+                            $("<div>").addClass("value").html(file.unknown0x0D)
+                        )
+                    );
+                }
+                if ("unknown0x0C" in file) {
+                    $details.append(
+                        $("<div>").append(
+                            $("<div>").addClass("label").html("Unknown0x0C:"),
+                            $("<div>").addClass("value").html(file.unknown0x0C)
+                        )
+                    );
+                }
+                if ("unknown0x15" in file) {
+                    $details.append(
+                        $("<div>").append(
+                            $("<div>").addClass("label").html("Unknown0x15:"),
+                            $("<div>").addClass("value").html(file.unknown0x15)
+                        )
+                    );
                 }
             }
-            
             $file.append(
                 $("<div>").addClass("filename").html(folderName + file.name).append(
                     (file.deleted ? "" : $("<div>").addClass("download-link").append(

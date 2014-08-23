@@ -112,6 +112,9 @@ function parseFileEntry(entry) {
             case 0x04:
                 file.crc32 = parseUInt(entries[i]);
                 break;
+            case 0x05:
+                file.unknown0x05 = parseUInt(entries[i]);
+                break;
             case 0x06:
                 file.deleted = parseUInt(entries[i]);
                 break;
@@ -131,8 +134,17 @@ function parseFileEntry(entry) {
             case 0x0D:
                 file.unknown0x0D = parseUInt(entries[i]);
                 break;
+            case 0x0C:
+                file.unknown0x0C = parseUInt(entries[i]);
+                break;
+            case 0x0E:
+                file.fileLink = parseString(entries[i]);
+                break;
             case 0x14:
                 file.locale = parseString(entries[i]);
+                break;
+            case 0x15:
+                file.unknown0x15 = parseUInt(entries[i]);
                 break;
             case 0xFE:
                 if (entries[i].entryType == 0x09) {
@@ -167,6 +179,9 @@ function parseFileDelta(entry) {
                 break;
             case 0x04:
                 delta.timestamp = parseDate(deltaData[i]);
+                break;
+            case 0x05:
+                delta.timestamp2 = parseDate(deltaData[i]);
                 break;
             case 0x08:
                 delta.sizeUncompressed = parseUInt(deltaData[i]);
@@ -213,7 +228,7 @@ function parseManifest(data) {
                 manifest.name = parseString(entry);
                 break;
             case 0x05:
-                manifest.url = parseString(entry);
+                manifest.baseUrl = parseString(entry);
                 break;
             case 0x06:
                 manifest.provider = parseString(entry);
@@ -251,17 +266,26 @@ function parseManifest(data) {
             case 0x1C:
                 manifest.executable = parseString(entry);
                 break;
+            case 0x1D:
+                manifest.executeableArgs = parseString(entry);
+                break;
             case 0x21:
-                manifest.patchName = parseString(entry);
+                manifest.patchBase = parseString(entry);
                 break;
             case 0x22:
                 manifest.setupExecutable = parseString(entry);
+                break;
+            case 0x24:
+                manifest.localPath1 = parseString(entry);
                 break;
             case 0x28:
                 manifest.patchUrl = parseString(entry);
                 break;
             case 0x29:
                 manifest.timestamp = parseDate(entry);
+                break;
+            case 0x2A:
+                manifest.localPath2 = parseString(entry);
                 break;
             case 0x2B:
                 manifest.locales = parseString(entry);
